@@ -13,6 +13,7 @@ using osu.Game.Overlays.Settings;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Scoring;
 using osu.Game.Screens.Play;
+using osu.Game.Resources.Localisation.Web;
 
 namespace osu.Game.Rulesets.Mods
 {
@@ -39,8 +40,9 @@ namespace osu.Game.Rulesets.Mods
         protected float ComboBasedAlpha;
 
         [SettingSource(
-            "Hidden at combo",
-            "The combo count at which the cursor becomes completely hidden",
+            typeof(ModsStrings),
+            nameof(ModsStrings.NoScopeSettingsHiddenComboLabel),
+            nameof(ModsStrings.NoScopeSettingsHiddenComboDescription),
             SettingControlType = typeof(SettingsSlider<int, HiddenComboSlider>)
         )]
         public abstract BindableInt HiddenComboCount { get; }
@@ -78,7 +80,9 @@ namespace osu.Game.Rulesets.Mods
 
         public static LocalisableString FormatHiddenComboValue(int value)
         {
-            return value == 0 ? "always hidden" : value.ToString();
+            return value == 0
+                ? ModsStrings.NoScopeSettingsHiddenComboAlwaysHidden
+                : value.ToString();
         }
     }
 }
